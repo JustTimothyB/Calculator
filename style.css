@@ -1,0 +1,12 @@
+.container {
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+    justify-content: center;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.output {
+    display: grid;
+    justify-content: center;
+}
