@@ -4,6 +4,7 @@ const operatorButtons = document.querySelectorAll('.operator');
 const clearButton = document.querySelector('.clear');
 const output = document.querySelector('output');
 const equalButton = document.querySelector('.equal');
+const decimalButton = document.querySelector('.decimal');
 
 // Calculator State
 let firstNumber = null;
@@ -44,9 +45,40 @@ equalButton.addEventListener('click', () => {
         const result = firstNumber + secondNumber;
         output.textContent = result;
     }
+
+    if (selectedOperator === '-'){
+        const result = firstNumber - secondNumber;
+        output.textContent = result;
+    }
+
+    if (selectedOperator === '*'){
+        const result = firstNumber * secondNumber;
+        output.textContent = result;
+    }
+
+    if (selectedOperator === '/'){
+        const result = firstNumber / secondNumber;
+        output.textContent = result;
+    }
 });
 
+decimalButton.addEventListener('click', () => {
+    if (waitingForSecondNumber === true) {
+        output.textContent = '0.';
+        waitingForSecondNumber = false;
+    }
+
+    if (output.textContent.includes('.')){
+        return;
+    }
+
+    output.textContent += '.';
+})
+
 // reset the calculator display.
-clearButton.addEventListener('click', () => {
+clearButton.addEventListener('click', () =>{
     output.textContent = '0';
+    firstNumber = null;
+    selectedOperator = null;
+    waitingForSecondNumber = false;
 });
