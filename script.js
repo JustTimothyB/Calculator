@@ -28,6 +28,10 @@ numberButtons.forEach((button) => {
             waitingForSecondNumber = false;
         } 
         else {
+            if (output.textContent.length >= 18){
+                return;
+            }
+
             output.textContent += clickedNumber;
         }
     });
