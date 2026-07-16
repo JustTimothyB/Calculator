@@ -6,6 +6,8 @@ const backspaceButton = document.querySelector('.backspace');
 const output = document.querySelector('output');
 const equalButton = document.querySelector('.equal');
 const decimalButton = document.querySelector('.decimal');
+const historyList = document.querySelector('.history-list');
+const emptyHistory = document.querySelector('.empty-history');
 
 // Calculator State
 let firstNumber = null;
@@ -41,32 +43,42 @@ operatorButtons.forEach((button) => {
 
 equalButton.addEventListener('click', () => {
     const secondNumber = Number(output.textContent);
+    let result;
 
-    if (selectedOperator === '+'){
-        const result = firstNumber + secondNumber;
-        output.textContent = result;
+    if (selectedOperator === '+') {
+        result = firstNumber + secondNumber;
     }
 
-    if (selectedOperator === '-'){
-        const result = firstNumber - secondNumber;
-        output.textContent = result;
+    if (selectedOperator === '-') {
+        result = firstNumber - secondNumber;
     }
 
-    if (selectedOperator === '*'){
-        const result = firstNumber * secondNumber;
-        output.textContent = result;
+    if (selectedOperator === '*') {
+        result = firstNumber * secondNumber;
     }
 
-    if (selectedOperator === '/'){
-        const result = firstNumber / secondNumber;
-        output.textContent = result;
+    if (selectedOperator === '/') {
+        result = firstNumber / secondNumber;
     }
+
+    output.textContent = result;
+
+    if (emptyHistory){
+        emptyHistory.remove();
+    }
+    const historyItem = document.createElement('p');
+
+    historyItem.textContent =
+        `${firstNumber} ${selectedOperator} ${secondNumber} = ${result}`;
+
+historyList.prepend(historyItem);
 });
 
 decimalButton.addEventListener('click', () => {
     if (waitingForSecondNumber === true) {
         output.textContent = '0.';
         waitingForSecondNumber = false;
+        return;
     }
 
     if (output.textContent.includes('.')){
