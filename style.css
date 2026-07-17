@@ -1,9 +1,8 @@
 .container {
     display: grid;
-    grid-template-columns: 150px 150px 150px;
+    grid-template-columns: 80px 80px 80px;
     justify-content: center;
-    column-gap: 10px;
-    row-gap: 10px;
+    gap: 4px;
 }
 
 .output {
@@ -11,7 +10,7 @@
     justify-content: flex-end;
     align-items: center;
 
-    width: 400px;
+    width: 250px;
     height: 80px;
 
     padding: 0 15px;
@@ -20,7 +19,7 @@
     border: 2px solid black;
     background-color: lightgray;
 
-    font-size: 36px;
+    font-size: 26px;
     box-sizing: border-box;
 }
 
@@ -29,6 +28,7 @@
     width: 80px;
     height: 40px;
     font-size: 24px;
+    border-radius: 10px;
 }
 
 .calculator-layout {
@@ -45,7 +45,7 @@
 
 .history {
     width: 250px;
-    height: 400px;
+    height: 350px;
     border: 2px solid black;
     padding: 15px;
 
@@ -55,6 +55,15 @@
 }
 
 .history-list {
-    flex: 1;            /* Fill the remaining space */
-    overflow-y: auto;   /* Only the list scrolls */
+    flex: 1;            
+    overflow-y: auto;
+}
+
+body {
+    background-color: lightseagreen;
+}
+
+button:hover {
+    cursor: pointer;
+    filter: brightness(1.1);
 }

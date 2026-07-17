@@ -1,4 +1,3 @@
-// HTML Element References
 const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const clearButton = document.querySelector('.clear');
@@ -9,18 +8,15 @@ const decimalButton = document.querySelector('.decimal');
 const historyList = document.querySelector('.history-list');
 const emptyHistory = document.querySelector('.empty-history');
 
-// Calculator State
 let firstNumber = null;
 let selectedOperator = null;
 let waitingForSecondNumber = false;
 
-// handle the number button input.
 numberButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
         const clickedNumber = event.target.textContent;
 
 
-        // replace the initial zero, otherwise append the new digit.
         if (output.textContent === '0' ||
             waitingForSecondNumber === true
         ) {
@@ -28,7 +24,7 @@ numberButtons.forEach((button) => {
             waitingForSecondNumber = false;
         } 
         else {
-            if (output.textContent.length >= 18){
+            if (output.textContent.length >= 12){
                 return;
             }
 
@@ -134,7 +130,6 @@ backspaceButton.addEventListener('click', () => {
     }
 })
 
-// reset the calculator display.
 clearButton.addEventListener('click', () =>{
     output.textContent = '0';
     firstNumber = null;
