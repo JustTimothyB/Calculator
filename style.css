@@ -67,3 +67,7 @@ button:hover {
     cursor: pointer;
     filter: brightness(1.1);
 }
+
+.calculator-layout {
+    border: 2px solid black;
+}

@@ -7,10 +7,12 @@ const equalButton = document.querySelector('.equal');
 const decimalButton = document.querySelector('.decimal');
 const historyList = document.querySelector('.history-list');
 const emptyHistory = document.querySelector('.empty-history');
+const clearHistoryButton = document.querySelector('.clear-history');
 
 let firstNumber = null;
 let selectedOperator = null;
 let waitingForSecondNumber = false;
+let calculationHistory = JSON.parse(localStorage.getItem('calculationHistory')) || [];
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
@@ -62,7 +64,7 @@ equalButton.addEventListener('click', () => {
             output.textContent = 'Error';
             return;
         }
-        
+
         result = firstNumber / secondNumber;
     }
 
@@ -71,12 +73,16 @@ equalButton.addEventListener('click', () => {
     if (emptyHistory){
         emptyHistory.remove();
     }
-    const historyItem = document.createElement('p');
 
-    historyItem.textContent =
-        `${firstNumber} ${selectedOperator} ${secondNumber} = ${result}`;
+const calculation = `${firstNumber} ${selectedOperator} ${secondNumber} = ${result}`;
+calculationHistory.unshift(calculation);
+localStorage.setItem(
+    'calculationHistory',
+    JSON.stringify(calculationHistory)
+);
 
-historyList.prepend(historyItem);
+displayHistory();
+
 });
 
 decimalButton.addEventListener('click', () => {
@@ -133,6 +139,29 @@ backspaceButton.addEventListener('click', () => {
     } else {
         output.textContent = '0';
     }
+})
+
+function displayHistory() {
+    historyList.innerHTML = '';
+    calculationHistory.forEach((calculation) => {
+        const historyItem = document.createElement('p');
+        historyItem.textContent = calculation;
+        historyList.appendChild(historyItem);
+    });
+}
+
+displayHistory();
+
+clearHistoryButton.addEventListener('click', () => {
+    calculationHistory = [];
+    localStorage.setItem(
+        'calculationHistory',
+        JSON.stringify(calculationHistory)
+    );
+        displayHistory();
+
+        historyList.innerHTML = '<p class = "empty-history"> No Calculations yet.</p>';
+
 })
 
 clearButton.addEventListener('click', () =>{
