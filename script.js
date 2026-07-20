@@ -58,6 +58,11 @@ equalButton.addEventListener('click', () => {
     }
 
     if (selectedOperator === '/') {
+        if (secondNumber === 0) {
+            output.textContent = 'Error';
+            return;
+        }
+        
         result = firstNumber / secondNumber;
     }
 
