@@ -8,6 +8,9 @@ const decimalButton = document.querySelector('.decimal');
 const historyList = document.querySelector('.history-list');
 const emptyHistory = document.querySelector('.empty-history');
 const clearHistoryButton = document.querySelector('.clear-history');
+const percentButton = document.querySelector('.percent');
+const positiveNegativeButton = document.querySelector('.positive-negative');
+const powerButton = document.querySelector('.power');
 
 let firstNumber = null;
 let selectedOperator = null;
@@ -68,6 +71,10 @@ equalButton.addEventListener('click', () => {
         result = firstNumber / secondNumber;
     }
 
+    if (selectedOperator === 'x^y') {
+        result = Math.pow(firstNumber, secondNumber);
+    }
+
     output.textContent = result;
 
     if (emptyHistory){
@@ -120,6 +127,7 @@ document.addEventListener('keydown', (event) => {
     }
 
     if (key === 'Enter' || key === '=') {
+        event.preventDefault();
         equalButton.click();
     }
 
@@ -162,6 +170,25 @@ clearHistoryButton.addEventListener('click', () => {
 
         historyList.innerHTML = '<p class = "empty-history"> No Calculations yet.</p>';
 
+})
+
+percentButton.addEventListener('click', () => {
+    const currentNumber = Number(output.textContent);
+    let percentResult;
+    if (
+        firstNumber !== null &&
+        (selectedOperator === '+' || selectedOperator === '-')
+    ) {
+            percentResult = firstNumber * (currentNumber / 100);
+        } else {
+            percentResult = currentNumber / 100;
+        }
+        output.textContent = Number(percentResult.toFixed(10));
+});
+
+positiveNegativeButton.addEventListener('click', () => {
+    const currentNumber = Number(output.textContent);
+    output.textContent = currentNumber * -1;
 })
 
 clearButton.addEventListener('click', () =>{
